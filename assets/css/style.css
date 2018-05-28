@@ -1,0 +1,43 @@
+body {
+    font-family: 'VT323', monospace;
+    color: rgb(120, 127, 221);
+    background-color: #E8E8E8;
+}
+
+.background {
+    background-image: url("../images/Bkground4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-shadow:
+    3px 3px 0 #fff,
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff; 
+}
+
+#new-game-button {
+    cursor: pointer;
+    font-size: 22px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+#placeholder-section {
+    background-image: url("../images/playstation-pattern.png");
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
+    /*background-image: url("../images/gun-metal.png");*/
+}
+
+#placeholders {
+    letter-spacing: 4px;
+    font-size: 40px;
+}
