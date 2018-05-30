@@ -8,20 +8,22 @@ body {
     background-image: url("../images/Bkground4.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center top;
+    /*background-attachment: fixed;*/
+    background-position: center /*top*/;
 }
 
 h1 {
-    font-size: 4rem;
-    font-weight: bold;
+    font-size: 3rem;
+    /*color: whitesmoke;*/
+    text-transform: uppercase;
+    /*font-weight: bold;*/
     letter-spacing: 5px;
     text-shadow:
     3px 3px 0 #fff,
     -1px -1px 0 #fff,
     1px -1px 0 #fff,
     -1px 1px 0 #fff,
-    1px 1px 0 #fff; 
+    1px 1px 0 #fff;
 }
 
 #new-game-button {
@@ -29,6 +31,7 @@ h1 {
     font-size: 22px;
     text-transform: uppercase;
     position: relative;
+    background-color: rgb(120, 127, 221); /* may want to remove */
 }
 
 #placeholder-section {
