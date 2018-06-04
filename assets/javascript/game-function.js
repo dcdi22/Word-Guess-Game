@@ -5,9 +5,15 @@ var $guessedLetters = document.getElementById("guessed-letters");
 var $guessesLeft = document.getElementById("guesses-left");
 var $wins = document.getElementById("wins");
 var $losses = document.getElementById("losses");
+//Sounds
+var loseSound = document.getElementById("loseSound");
+var winSound = document.getElementById("winSound");
+var startSound = document.getElementById("startSound");
+var correctSound = document.getElementById("correctSound");
+var incorrectSound = document.getElementById("incorrectSound");
 
 // Creat variables for game (wordbank, wins, losses, picked word, guesses left, game running, picked word placeholder, guessed letter bank, incorrect letter bank)
-var wordBank = ["Fallout", "Horizon Zero Dawn", "Tomb Raider", "Assassins Creed", "Mortal Combat", "Bioshock", "Life Is Strange", "Red Dead Redemption"];
+var wordBank = ["Fallout", "Horizon Zero Dawn", "Tomb Raider", "Assassins Creed", "Mortal Kombat", "Bioshock", "Life Is Strange", "Red Dead Redemption", "Last of Us", "Until Dawn", "The Witcher", "StarDew Valley"];
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
@@ -17,6 +23,7 @@ var pickedWordPlaceholderArr = [];
 var guessedLetterBank = [];
 var incorrectLetterBank = [];
 
+
 // New game function to reset all stats, pick new word and create placeholders
 function newGame() {
     // reset all game info
@@ -25,6 +32,15 @@ function newGame() {
     guessedLetterBank = [];
     incorrectLetterBank = [];
     pickedWordPlaceholderArr = [];
+    //sound
+    var startSoundFlag = true;
+    //play sound
+    if (startSoundFlag) {
+        startSound.pause();
+        startSound.currentTime = 0;
+        startSound.play();
+        startSoundFlag = false;
+    };
 
     // Pick a new word 
     pickedWord = wordBank[Math.floor(Math.random() * wordBank.length)];
@@ -54,24 +70,34 @@ function letterGuess(letter) {
         // Run game logic
         guessedLetterBank.push(letter);
 
-        // check if gueseed letter is in my picked word
-        for (var i = 0; i < pickedWord.length; i++) {
+        // check if guessed letter is in my picked word
+        for (var i = 0; i < pickedWord.length; i++) { 
             // convert both values to lowercase so I can compare them correctly
             if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
                 // if a match, swap out that character in the placeholder with actual character
                 pickedWordPlaceholderArr[i] = pickedWord[i];
+                //sound
+                var correctSoundFlag = true;
+                //play sound
+                if (correctSoundFlag) {
+                    correctSound.pause();
+                    correctSound.currentTime = 0;
+                    correctSound.play();
+                    correctSoundFlag = false;
+                };
             }
         }
 
-        $placeholders.textContent = pickedWordPlaceholderArr.join("");
+        $placeholders.textContent = pickedWordPlaceholderArr.join("");//join is the same as .appendChild?
         checkIncorrect(letter);
+        
 
 
 
     }
     else {
         if (!gameRunning) {
-            alert("The game isn't running")
+            alert("You need to press 'start' if you want to play")
         }
         else {
             alert("You've already guessed this letter, try a new one!")//Just gives user some feedback
@@ -90,16 +116,59 @@ function checkIncorrect(letter) {
          //Write new bank of incorrect letters gussed to DOM
         $guessedLetters.textContent = incorrectLetterBank.join(" ");
         // Write new amount of guesses left to DOM
-        $guessesLeft.textContent = guessesLeft; 
+        $guessesLeft.textContent = guessesLeft;
+        //sound
+        var incorrectSoundFlag = true;
+        //play sound
+        if (incorrectSoundFlag) {
+            incorrectSound.pause();
+            incorrectSound.currentTime = 0;
+            incorrectSound.play();
+            incorrectSoundFlag = false;
+        };
     }
+
+    checkLose();
+    checkWin();
 } 
 
 
 // checkLose
+function checkLose() {
+    if (guessesLeft <= 0) {
+        var loseSoundFlag = true;
+        losses++;
+        $losses.textContent = losses;
+        //play sound
+        if (loseSoundFlag) {
+            loseSound.pause();
+            loseSound.currentTime = 0;
+            loseSound.play();
+            loseSoundFlag = false;
+        };
+        alert("Sorry, you lost");
+        gameRunning = false;
+    }
+}
 
 
 // checkWin
-
+function checkWin() {
+    if (pickedWord.toLowerCase() === pickedWordPlaceholderArr.join("").toLowerCase()) {
+        var winSoundFlag = true;
+        wins++;
+        $wins.textContent = wins;
+        //play sound
+        if (winSoundFlag) {
+            winSound.pause();
+            winSound.currentTime = 0;
+            winSound.play();
+            winSoundFlag = false;
+        };
+        alert("Hooray, you won");
+        gameRunning = false;
+    }
+}
 
 // Add eventListener for new game button 
 $newGameButton.addEventListener("click", newGame);
