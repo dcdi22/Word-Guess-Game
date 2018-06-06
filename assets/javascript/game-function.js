@@ -71,7 +71,7 @@ function letterGuess(letter) {
         guessedLetterBank.push(letter);
 
         // check if guessed letter is in my picked word
-        for (var i = 0; i < pickedWord.length; i++) { 
+        for (var i = 0; i < pickedWord.length; i++) { //Goes thru string letter by letter
             // convert both values to lowercase so I can compare them correctly
             if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
                 // if a match, swap out that character in the placeholder with actual character
