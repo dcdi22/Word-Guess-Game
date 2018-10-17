@@ -7,6 +7,7 @@ var $wins = document.getElementById("wins");
 var $losses = document.getElementById("losses");
 //Sounds
 var loseSound = document.getElementById("loseSound");
+// var loseSound = $("#loseSound");
 var winSound = document.getElementById("winSound");
 var startSound = document.getElementById("startSound");
 var correctSound = document.getElementById("correctSound");
